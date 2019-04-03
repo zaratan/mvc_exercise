@@ -2,11 +2,11 @@
 
 ## App specifications
 
-* Ruby version : 2.5.3  
+* Ruby version : 2.6.2
 
-* Rails version : 5.2  
+* Rails version : 5.2
 
-* Test framework : rspec  
+* Test framework : rspec
 
 
 ## Guidelines
@@ -19,24 +19,23 @@
 
    :dizzy_face: **Do not delve too deeply in the documentation !**
    We expect you to be curious and we definitely expect you to go deeper in the weekly concepts. A lot of this is new and you will want to know it all. However, we recommand that you take your time or **it will drive you crazy**. Please, **FOCUS** on the tasks that are described. They are already a handful ! Our method consists in learning by doing, it is much less painful. 
-   
+
 ## Cloning the repository
 
 * Clone the repository
 
 * Husky :
-  * cd in the directory and run `npm install husky --save-dev`
+  * cd in the directory and run `npm install`
 
 * Bundle
   * run `bundle install`
-  * run `bundle update`
 
 * Docker :
   * check that Docker is properly installed with the command `docker run hello-world`
   * check that docker-compose is properly installed with the command `docker-compose --version`
-  * check that you can build the dependencies with the command `docker-compose up redis postgres maildev`
+  * check that you can build the dependencies with the command `docker-compose up redis postgres maildev` or just `docker-compose up`
   * open another terminal window and check that your services are up with the command `docker-compose ps`
-  * setup the database with `rails db:create db:migrate` 
+  * setup the database with `rails db:create db:migrate db:seed`
   * Launch local server with `rails server`
 
 :fire: **Don't execute the following section if everything works well**
@@ -55,7 +54,7 @@ If you're reading this, it means that something is wrong in your docker configur
    - modified postgres setup : `- 127.0.0.1:5435:5432`
 
 2. Tell rails where to look for the service :
-   
+
    Depending on the service you modified, you will have to edit a file or another in your rails application. If you modified the port for the puma server to 3001 instead of 3000, then you will have to modify the **puma.rb** file consequently. 
 
    In the previous example, you modified the ports for your postgres container. It means that in rails, you will have to modify the following line in your **database.yml** file :
@@ -74,4 +73,4 @@ If you're reading this, it means that something is wrong in your docker configur
 ## Follow the wiki
 
 We have setup the app, it's time to code ! :shipit:
-All the instructions are given in the wiki.
+All the instructions are given in the mvc directory in the formation github.
