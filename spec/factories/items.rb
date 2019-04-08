@@ -18,7 +18,8 @@ FactoryBot.define do
     has_discount        { Faker::Boolean.boolean }
 
     trait :with_discount do
-      has_discount { true }
+      has_discount        { true }
+      discount_percentage { (1..10).to_a.sample * 5 }
     end
 
     factory :item_with_discount, traits: %i[with_discount]
