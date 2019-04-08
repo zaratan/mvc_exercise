@@ -35,8 +35,8 @@ group :development do
   gem 'annotate', '~> 2.7', '>= 2.7.4'
   gem 'husky', '~> 0.5.15'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'rubocop', '~> 0.60.0', require: false
-  gem 'rubocop-rspec', '~> 1.30', '>= 1.30.1', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
   gem 'spring', '~> 2.0', '>= 2.0.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end

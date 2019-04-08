@@ -70,7 +70,5 @@ If you're reading this, it means that something is wrong in your docker configur
 :raising_hand: **If your docker configuration still doesn't work by now, notify a staff member.**
 
 
-## Follow the wiki
-
 We have setup the app, it's time to code ! :shipit:
 All the instructions are given in the mvc directory in the formation github.
