@@ -19,7 +19,7 @@ class Item < ApplicationRecord
 
   def self.average_price
     array_pricing = []
-    all.each do |el|
+    Item.find_each do |el|
       array_pricing << el.original_price
     end
     average_pricing = array_pricing.sum / array_pricing.length
