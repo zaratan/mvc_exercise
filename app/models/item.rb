@@ -13,7 +13,6 @@
 #
 
 class Item < ApplicationRecord
-
   def price
     if has_discount
       (original_price - original_price * discount_percentage.to_f / 100).round(2)
@@ -23,6 +22,6 @@ class Item < ApplicationRecord
   end
 
   def self.average_price
-    self.all.map{|item| item.price }.sum / self.count
+    all.map(&:price).sum / count
   end
 end
