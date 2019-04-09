@@ -29,9 +29,7 @@ RSpec.describe Item, type: :model do
   end
 
   context 'when validation is ok' do
-    it 'has a valid factory' do
-      it { expect(build(:item)).to be_valid }
-    end
+    it { expect(build(:item)).to be_valid } 
   end
 
   describe 'Price' do
