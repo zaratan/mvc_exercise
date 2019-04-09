@@ -19,3 +19,7 @@ test:
 production:
   <<: *default
   database: mvc_exercise_production
+
+staging:
+  <<: *default
+  database: mvc_exercise_staging
