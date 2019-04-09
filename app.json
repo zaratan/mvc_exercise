@@ -1,0 +1,18 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ],
+  "description": "THP Next 2 MVC app exercise",
+  "env": {
+    "ENV_KEY": "ENV_VALUE"
+  },
+  "formation": {
+  },
+  "name": "next_mvc_exercise",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
