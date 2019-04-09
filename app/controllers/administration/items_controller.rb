@@ -8,6 +8,8 @@ module Administration
     end
 
     def update
+      @item = Item.find(params["id"])
+      @item.update(discount_percentage: params[:item]['discount_percentage'], has_discount: true)
       redirect_to administration_items_path
     end
   end
