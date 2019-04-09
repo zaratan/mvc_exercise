@@ -11,6 +11,7 @@ File.read('./.ruby-version')
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'coffee-rails', '~> 4.2'
 gem 'devise', '~> 4.5.0'
+gem 'faker', '~> 1.8', '>= 1.8.7'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'
 gem 'jbuilder', '~> 2.5'
@@ -25,7 +26,6 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'factory_bot_rails', '~> 4.0'
-  gem 'faker', '~> 1.8', '>= 1.8.7'
   gem 'pry-byebug', '~> 3.6'
   gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
   gem 'sandi_meter', '~> 1.2'
