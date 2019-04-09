@@ -28,6 +28,12 @@ RSpec.describe Item, type: :model do
     end
   end
 
+  context 'when validation is ok' do
+    it 'has a valid factory' do
+      it { expect(build(:item)).to be_valid }
+    end
+  end
+
   describe 'Price' do
     context 'when the item has a discount' do
       let(:item) { build(:item_with_discount, original_price: 100.00, discount_percentage: 20) }
