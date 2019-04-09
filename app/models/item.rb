@@ -13,6 +13,12 @@
 #
 
 class Item < ApplicationRecord
+  validates :original_price, numericality: { greater_than: 0.0 }
+  validates :original_price, presence: { message: "Original price must be present" }
+  
+  validates :discount_percentage, inclusion: { in: 0..100 }
+  validates :discount_percentage, numericality: true
+
   def price
     has_discount ? original_price - (original_price * discount_percentage.to_f / 100.0) : original_price
   end
