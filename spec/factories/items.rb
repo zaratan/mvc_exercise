@@ -25,5 +25,6 @@ FactoryBot.define do
     end
     factory :item_with_discount, traits: %i[with_discount]
     factory :item_without_discount, traits: %i[without_discount]
+
   end
 end
