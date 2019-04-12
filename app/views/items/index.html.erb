@@ -11,7 +11,9 @@
                   <th>Prix de départ</th>
                   <th>Pourcentage de remise</th>
                   <th>Prix</th>
-                  <th></th>
+                  <% if current_admin %>
+                    <th></th>
+                  <% end %>
                 </tr>
               </thead>
               <tbody>
@@ -22,7 +24,7 @@
             </table>
           </div>
         </div>
-
+        <p class="center">Average price: <%= @average %></p>
       </div>
     </div>
   </div>

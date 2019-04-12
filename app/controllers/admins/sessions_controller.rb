@@ -9,10 +9,10 @@ module Admins
     #   super
     # end
 
-    # POST /resource/sign_in
-    # def create
-    #   super
-    # end
+    def create
+      super
+      redirect_to administration_items_path
+    end
 
     # DELETE /resource/sign_out
     # def destroy

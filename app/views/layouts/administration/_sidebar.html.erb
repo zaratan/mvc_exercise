@@ -10,7 +10,7 @@
     <ul class="sidebar-nav">
 
       <li class="sidebar-item">
-        <% if current_user.is_a?(Admin) %>
+        <% if current_admin %>
           <%= link_to administration_items_path, class: "sidebar-link" do %>
             <span class="align-middle">
               Items
@@ -22,6 +22,13 @@
               Items
             </span>
           <% end %>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to (current_admin ? destroy_admin_session_path : destroy_user_session_path), class: 'sidebar-link', method: :delete do %>
+          <span class="align-middle">
+            Sign out
+          </span>
         <% end %>
       </li>
 

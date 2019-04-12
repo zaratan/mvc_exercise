@@ -1,5 +1,5 @@
 
-<% if current_user.is_a?(Admin) %>
+<% if current_admin %>
   <%= form_for item, url: administration_item_url(item.id), html: {class: ""} do |f| %>
     <tr>
       <td> <%= item.original_price %></td>
