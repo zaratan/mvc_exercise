@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Administration::ItemsController, type: :controller do
+  before { sign_in_fake(test_admin) }
+
   describe "GET #index" do
     it "returns http success" do
       get :index
