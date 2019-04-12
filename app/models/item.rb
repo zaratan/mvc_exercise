@@ -12,43 +12,27 @@
 #  updated_at          :datetime         not null
 #
 
-class DiscountValidation < ActiveModel::Validator
-  def validate(record)
-    return unless record.has_discount_changed? || record.id.nil?
-
-    if no_discount_flag_but_discount?(record)
-      record.errors[:has_discount] << "Cannot have a 'has_discount' value to false if there's a discount_percentage."
-    end
-
-    return unless discount_flag_but_no_discount?(record)
-
-    record.errors[:has_discount] << "Cannot have a 'has_discount' value to true if there's no discount_percentage."
-  end
-
-  def no_discount_flag_but_discount?(record)
-    !record.has_discount && !record.discount_percentage.zero? && !record.discount_percentage.nil?
-  end
-
-  def discount_flag_but_no_discount?(record)
-    record.has_discount && (record.discount_percentage.zero? || record.discount_percentage.nil?)
-  end
-end
-
 class Item < ApplicationRecord
   include ActiveModel::Validations
 
   validates :original_price, presence: true, numericality: { greater_than: 0 }
   validates :discount_percentage, numericality: { greater_than_or_equal_to: 0, less_than: 100 }
-  validates_with DiscountValidation
+  validates_with Validators::Discount
 
   before_save :toggle_has_discount_if_necessary
 
   def price
     if has_discount
-      (original_price - (discount_percentage * original_price / 100)).truncate(2)
+      (original_price - (discount_percentage * original_price / 100))
     else
       original_price
-    end
+    end.round(2)
+  end
+
+  def self.average_price
+    return if Item.count.zero?
+
+    Item.average("original_price * (100 - discount_percentage)/100").round(2)
   end
 
   private

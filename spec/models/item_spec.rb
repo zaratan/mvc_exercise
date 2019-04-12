@@ -53,18 +53,20 @@ RSpec.describe Item, type: :model do
 
   context 'when the item has a discount' do
     context 'when the item price is divible by the discout_percentage' do
-      let(:item) { build(:item_with_discount, original_price: 100) }
+      let(:item) { build(:item_with_discount) }
 
       it "returns the computed price" do
-        expect(item.price).to eq(80)
+        expect(item.price).to eq(
+          (item.original_price * (100 - item.discount_percentage) / 100).round(2)
+        )
       end
     end
 
     context 'when the item price is not divible by the discout_percentage' do
-      let(:item) { build(:item_with_discount, original_price: 39.99) }
+      let(:item) { build(:item, original_price: 39.99, has_discount: true, discount_percentage: 12) }
 
       it "returns a readable computed price, with 2 digits after coma" do
-        expect(item.price).to eq(31.99)
+        expect(item.price.to_s).to match(/^\d+.\d{2}$/)
       end
     end
 
@@ -73,6 +75,30 @@ RSpec.describe Item, type: :model do
 
       it "returns the original price" do
         expect(item.price).to eq(item.original_price)
+      end
+    end
+  end
+
+  describe "@average_price" do
+    subject do
+      Item.average_price
+    end
+
+    let!(:items) { create_list(:item_with_discount, Random.rand(3..10)) }
+
+    it "calculates the right average" do
+      expect(subject).to eq(
+        (
+          items.sum{ |item| item.original_price * (100 - item.discount_percentage) / 100 } / items.size
+        ).round(2)
+      )
+    end
+
+    context "when there's no item" do
+      before { Item.destroy_all }
+
+      it "returns nil" do
+        expect(subject).to be_nil
       end
     end
   end
