@@ -16,12 +16,21 @@ class DiscountValidation < ActiveModel::Validator
   def validate(record)
     return unless record.has_discount_changed? || record.id.nil?
 
-    if !record.has_discount && !record.discount_percentage.zero? && !record.discount_percentage.nil?
+    if no_discount_flag_but_discount?(record)
       record.errors[:has_discount] << "Cannot have a 'has_discount' value to false if there's a discount_percentage."
     end
-    if record.has_discount && (record.discount_percentage.zero? || record.discount_percentage.nil?)
-      record.errors[:has_discount] << "Cannot have a 'has_discount' value to true if there's no discount_percentage."
-    end
+
+    return unless discount_flag_but_no_discount?(record)
+
+    record.errors[:has_discount] << "Cannot have a 'has_discount' value to true if there's no discount_percentage."
+  end
+
+  def no_discount_flag_but_discount?(record)
+    !record.has_discount && !record.discount_percentage.zero? && !record.discount_percentage.nil?
+  end
+
+  def discount_flag_but_no_discount?(record)
+    record.has_discount && (record.discount_percentage.zero? || record.discount_percentage.nil?)
   end
 end
 
@@ -46,12 +55,12 @@ class Item < ApplicationRecord
 
   def toggle_has_discount_if_necessary
     return unless discount_percentage_changed?
-    
-      if discount_percentage == 0 || discount_percentage.nil?
-        has_discount = false
-        discount_percentage = nil
-      else
-        has_discount = true
-      end
+
+    if discount_percentage.zero? || discount_percentage.nil?
+      self.has_discount = false
+      self.discount_percentage = nil
+    else
+      self.has_discount = true
+    end
   end
 end

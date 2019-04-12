@@ -4,5 +4,5 @@
   Item.create!(
     original_price: Faker::Number.decimal(2)
   )
-  p "ITEM #{i} : créé"
+  Rails.logger.info("ITEM #{i} : créé")
 end

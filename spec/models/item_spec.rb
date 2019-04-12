@@ -16,15 +16,12 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   describe 'Model creation' do
-    subject do
-      create(:item)
+    subject(:item) do
+      create(:item).reload
     end
 
     it 'is creatable' do
-      item = subject.reload
       expect(item.original_price).not_to be_nil
-      # expect(item.has_discount).not_to be_nil
-      # expect(item.discount_percentage).not_to be_nil
     end
   end
 
@@ -54,22 +51,20 @@ RSpec.describe Item, type: :model do
     end
   end
 
-  describe 'Price' do
-    context 'when the item has a discount' do
-      context 'when the item price is divible by the discout_percentage' do
-        let(:item) { build(:item_with_discount, original_price: 100) }
+  context 'when the item has a discount' do
+    context 'when the item price is divible by the discout_percentage' do
+      let(:item) { build(:item_with_discount, original_price: 100) }
 
-        it "returns the computed price" do
-          expect(item.price).to eq(80)
-        end
+      it "returns the computed price" do
+        expect(item.price).to eq(80)
       end
+    end
 
-      context 'when the item price is not divible by the discout_percentage' do
-        let(:item) { build(:item_with_discount, original_price: 39.99) }
+    context 'when the item price is not divible by the discout_percentage' do
+      let(:item) { build(:item_with_discount, original_price: 39.99) }
 
-        it "returns a readable computed price, with 2 digits after coma" do
-          expect(item.price).to eq(31.99)
-        end
+      it "returns a readable computed price, with 2 digits after coma" do
+        expect(item.price).to eq(31.99)
       end
     end
 
